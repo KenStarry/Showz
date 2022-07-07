@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bg_padding">10dp</dimen>
+
+    <dimen name="toolbar_height">50dp</dimen>
+    <dimen name="corner_radius">100dp</dimen>
+
+    <!--Text Sizes-->
+    <dimen name="text_900">32sp</dimen>
+    <dimen name="text_800">28sp</dimen>
+    <dimen name="text_700">24sp</dimen>
+    <dimen name="text_600">22sp</dimen>
+    <dimen name="text_500">20sp</dimen>
+    <dimen name="text_400">18sp</dimen>
+    <dimen name="text_300">16sp</dimen>
+    <dimen name="text_200">14sp</dimen>
+    <dimen name="text_100">12sp</dimen>
+    <dimen name="text_50">10sp</dimen>
+    <dimen name="text_smallest">8sp</dimen>
+
+    <dimen name="view_900">32dp</dimen>
+    <dimen name="view_800">28dp</dimen>
+    <dimen name="view_700">24dp</dimen>
+    <dimen name="view_600">22dp</dimen>
+    <dimen name="view_500">20dp</dimen>
+    <dimen name="view_400">18dp</dimen>
+    <dimen name="view_300">16dp</dimen>
+    <dimen name="view_200">14dp</dimen>
+    <dimen name="view_100">12dp</dimen>
+    <dimen name="view_50">10dp</dimen>
+    <dimen name="view_smallest">8dp</dimen>
+</resources>
