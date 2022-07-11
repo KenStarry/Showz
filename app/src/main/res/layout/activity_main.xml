@@ -34,7 +34,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:layout_weight="3"
+            android:layout_weight="4"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
             android:orientation="vertical">
 
             <TextView
@@ -52,6 +54,19 @@
                 android:textStyle="bold"/>
 
         </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_dark_mode" />
+
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -95,7 +110,9 @@
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:progressTint="?attr/colorPrimary"
             android:layout_gravity="center" />
+
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

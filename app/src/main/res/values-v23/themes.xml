@@ -10,6 +10,13 @@
         <item name="colorSecondary">@color/accent_secondary</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/bg_black_dark</item>
+
+        <!--text color-->
+        <item name="textBlack900">@color/text_black_900</item>
+        <item name="textBlack700">@color/text_black_700</item>
+        <item name="textBlack500">@color/text_black_500</item>
+        <item name="textBlack300">@color/text_black_300</item>
+
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <item name="android:windowLightStatusBar">true</item>

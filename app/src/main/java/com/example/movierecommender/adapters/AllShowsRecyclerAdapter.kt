@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movierecommender.R
 import com.example.movierecommender.models.ShowDataModel
@@ -18,14 +19,6 @@ class AllShowsRecyclerAdapter(arrayList: ArrayList<ShowDataModel>?, context: Con
     val showsArrayList: ArrayList<ShowDataModel>? = arrayList
     val context: Context = context
 
-
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        val showTitle: TextView = itemView.findViewById(R.id.showTitle)
-        val showImage: ImageView = itemView.findViewById(R.id.showImage)
-        val showRating: TextView = itemView.findViewById(R.id.showRating)
-
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -41,9 +34,26 @@ class AllShowsRecyclerAdapter(arrayList: ArrayList<ShowDataModel>?, context: Con
         holder.showTitle.text = showDataModel.showTitle
         holder.showRating.text = showDataModel.showRating
         Picasso.get().load(showDataModel.showImage).into(holder.showImage)
+
+        //  OnClick listeners
+        holder.showImage.setOnClickListener {
+            toast(showDataModel.showTitle)
+        }
     }
 
     override fun getItemCount(): Int {
         return showsArrayList!!.size
+    }
+
+    fun toast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        val showTitle: TextView = itemView.findViewById(R.id.showTitle)
+        val showImage: ImageView = itemView.findViewById(R.id.showImage)
+        val showRating: TextView = itemView.findViewById(R.id.showRating)
+
     }
 }

@@ -10,12 +10,25 @@
 
     <!--Light mode-->
     <color name="bg_white_light">#f5f5f5</color>
-    <color name="accent_primary">#86c232</color>
+    <color name="accent_1">#86c232</color>
+    <color name="accent_primary">#03ADC7</color>
+    <color name="accent_2">#86c232</color>
     <color name="accent_secondary">#61892F</color>
 
+    <color name="text_black_900">#000000</color>
+    <color name="text_black_700">#171717</color>
+    <color name="text_black_500">#2B2B2B</color>
+    <color name="text_black_300">#333333</color>
+
+
     <!--Dark mode-->
-    <color name="bg_black_light">#474B4F</color>
+    <color name="bg_black_light">#2C3941</color>
     <color name="bg_black_light_trans">#B2474B4F</color>
     <color name="bg_black_dark">#222629</color>
     <color name="bg_black_dark_trans">#B2222629</color>
+
+    <color name="text_white_900">#FFFFFF</color>
+    <color name="text_white_700">#F1F1F1</color>
+    <color name="text_white_500">#E6E6E6</color>
+    <color name="text_white_300">#D8D8D8</color>
 </resources>
