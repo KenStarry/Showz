@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/programyzilla/Kotlin/Android/MovieRecommender/app/src/main/res/drawable/gradient_bg.xml" value="0.12" />
         <entry key="..\:/programyzilla/Kotlin/Android/MovieRecommender/app/src/main/res/drawable/ic_dark_mode.xml" value="0.12" />
         <entry key="..\:/programyzilla/Kotlin/Android/MovieRecommender/app/src/main/res/drawable/ic_notifications_active.xml" value="0.12" />
         <entry key="..\:/programyzilla/Kotlin/Android/MovieRecommender/app/src/main/res/drawable/ic_star_half.xml" value="0.179" />

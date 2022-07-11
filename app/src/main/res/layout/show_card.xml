@@ -69,19 +69,28 @@
         </FrameLayout>
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:id="@+id/showTitle"
-            android:text="Black Panther"
-            android:textColor="?attr/textBlack700"
-            android:textStyle="bold"
-            android:textSize="@dimen/_12ssp"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_marginTop="@dimen/_10sdp"
-            android:includeFontPadding="false"/>
+            android:transitionName="showTitleTransition">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/showTitle"
+                android:text="Black Panther"
+                android:textColor="?attr/textBlack700"
+                android:textStyle="bold"
+                android:textSize="@dimen/_14ssp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:includeFontPadding="false" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

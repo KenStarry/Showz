@@ -42,10 +42,15 @@ class AllShowsRecyclerAdapter(arrayList: ArrayList<ShowDataModel>?, private val 
         holder.showImage.setOnClickListener {
 
             //  Make an image transition
-            val options = ActivityOptions.makeSceneTransitionAnimation(context as Activity, Pair(holder.showImage, "showImageTransition"))
+            val options = ActivityOptions.makeSceneTransitionAnimation(
+                context as Activity,
+                Pair(holder.showImage, "showImageTransition"),
+                Pair(holder.showTitle, "showTitleTransition")
+            )
 
             val intent = Intent(context as Activity, ViewShowActivity::class.java).apply {
                 putExtra("showImageExtra", showDataModel.showImage)
+                putExtra("showTitleExtra", showDataModel.showTitle)
             }
 
             context.startActivity(intent, options.toBundle())

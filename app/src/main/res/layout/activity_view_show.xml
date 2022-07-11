@@ -27,13 +27,22 @@
             android:orientation="vertical"
             android:gravity="center">
 
-            <TextView
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Movie"
-                android:textColor="@color/text_white_900"
-                android:textSize="@dimen/_20ssp"
-                android:textStyle="bold"/>
+                android:transitionName="showTitleTransition">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/viewShowTitle"
+                    android:text=""
+                    android:textColor="@color/text_white_900"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
 
         </LinearLayout>
 

@@ -3,6 +3,7 @@ package com.example.movierecommender.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -15,9 +16,11 @@ import org.json.JSONObject
 class ViewShowActivity : AppCompatActivity() {
 
     private var viewShowImage: ImageView? = null
+    private var viewShowTitle: TextView? = null
 
     private val url = "https://api.tvmaze.com/shows"
     private var showImageExtra: String? = null
+    private var showTitleExtra: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -26,9 +29,9 @@ class ViewShowActivity : AppCompatActivity() {
 
         val intent = intent
         showImageExtra = intent.getStringExtra("showImageExtra")
+        showTitleExtra = intent.getStringExtra("showTitleExtra")
 
         initVariables()
-        Picasso.get().load(showImageExtra).into(viewShowImage)
 
     }
 
@@ -59,5 +62,9 @@ class ViewShowActivity : AppCompatActivity() {
     private fun initVariables() {
 
         viewShowImage = findViewById(R.id.viewShowImage)
+        viewShowTitle = findViewById(R.id.viewShowTitle)
+
+        Picasso.get().load(showImageExtra).into(viewShowImage)
+        viewShowTitle?.text = showTitleExtra
     }
 }
