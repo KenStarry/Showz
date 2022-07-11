@@ -20,6 +20,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowContentTransitions">true</item>
         <!-- Customize your theme here. -->
 
 

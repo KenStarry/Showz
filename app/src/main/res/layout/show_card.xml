@@ -30,7 +30,8 @@
                     android:layout_height="match_parent"
                     android:id="@+id/showImage"
                     android:src="@drawable/colorofmusic_x"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:transitionName="showImageTransition"/>
 
             </androidx.cardview.widget.CardView>
 

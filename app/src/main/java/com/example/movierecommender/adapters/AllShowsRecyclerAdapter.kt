@@ -1,6 +1,10 @@
 package com.example.movierecommender.adapters
 
+import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Context
+import android.content.Intent
+import android.util.Pair
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,16 +13,15 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movierecommender.R
+import com.example.movierecommender.activities.ViewShowActivity
 import com.example.movierecommender.models.ShowDataModel
 import com.squareup.picasso.Picasso
 import java.util.ArrayList
 
-class AllShowsRecyclerAdapter(arrayList: ArrayList<ShowDataModel>?, context: Context) :
+class AllShowsRecyclerAdapter(arrayList: ArrayList<ShowDataModel>?, private val context: Context) :
     RecyclerView.Adapter<AllShowsRecyclerAdapter.ViewHolder>() {
 
-    val showsArrayList: ArrayList<ShowDataModel>? = arrayList
-    val context: Context = context
-
+    private val showsArrayList: ArrayList<ShowDataModel>? = arrayList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -37,7 +40,15 @@ class AllShowsRecyclerAdapter(arrayList: ArrayList<ShowDataModel>?, context: Con
 
         //  OnClick listeners
         holder.showImage.setOnClickListener {
-            toast(showDataModel.showTitle)
+
+            //  Make an image transition
+            val options = ActivityOptions.makeSceneTransitionAnimation(context as Activity, Pair(holder.showImage, "showImageTransition"))
+
+            val intent = Intent(context as Activity, ViewShowActivity::class.java).apply {
+                putExtra("showImageExtra", showDataModel.showImage)
+            }
+
+            context.startActivity(intent, options.toBundle())
         }
     }
 

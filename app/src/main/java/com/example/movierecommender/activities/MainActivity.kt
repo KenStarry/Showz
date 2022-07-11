@@ -1,5 +1,6 @@
 package com.example.movierecommender.activities
 
+import android.app.ActivityOptions
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,8 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.Fade
+import androidx.transition.Transition
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -23,15 +26,25 @@ import java.util.ArrayList
 class MainActivity : AppCompatActivity() {
 
     //  url for querying our data
-    val url = "https://api.tvmaze.com/shows"
-    var showsModelArrayList: ArrayList<ShowDataModel>? = null
-    var recyclerView: RecyclerView? = null
-    var progressBar: ProgressBar? = null
+    private val url = "https://api.tvmaze.com/shows"
+
+    private var showsModelArrayList: ArrayList<ShowDataModel>? = null
+    private var recyclerView: RecyclerView? = null
+    private var progressBar: ProgressBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+//        var fadeAnimation = Fade()
+//        var decor: View = window.decorView
+//
+//        fadeAnimation.excludeTarget(android.R.id.statusBarBackground, true)
+//        fadeAnimation.excludeTarget(android.R.id.navigationBarBackground, true)
+//
+//        window.enterTransition = fadeAnimation
+//        window.exitTransition = fadeAnimation
 
         showsModelArrayList = ArrayList()
         recyclerView = findViewById(R.id.allShowsRecyclerView)
@@ -57,11 +70,14 @@ class MainActivity : AppCompatActivity() {
                     val showImage: String =
                         responseJSONObject.getJSONObject("image").getString("original")
 
+                    val showId: String = responseJSONObject.getString("id")
+
                     showsModelArrayList!!.add(
                         ShowDataModel(
                             showImage = showImage,
                             showTitle = showName,
-                            showRating = showRating
+                            showRating = showRating,
+                            showId = showId
                         )
                     )
                 }
