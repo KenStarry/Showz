@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:layout_weight="4"
+            android:layout_weight="5"
             android:paddingStart="@dimen/_10sdp"
             android:paddingEnd="@dimen/_10sdp"
             android:orientation="vertical">
@@ -43,6 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hello,"
+                android:textColor="?attr/textBlack300"
                 android:textSize="@dimen/text_100"
                 android:textStyle="bold"/>
 
@@ -50,48 +51,45 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Kenneth M."
+                android:textColor="?attr/textBlack500"
                 android:textSize="@dimen/text_500"
                 android:textStyle="bold"/>
 
         </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_weight="1">
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:gravity="center">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_dark_mode" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_weight="1">
+                android:src="@drawable/ic_dark_mode"
+                android:layout_marginEnd="@dimen/_5sdp"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_notifications_active" />
+                android:src="@drawable/ic_notifications_active"
+                android:layout_marginStart="@dimen/_5sdp"/>
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
 
     <TextView
+        android:id="@+id/allShowsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/allShowsTitle"
-        android:text="All Shows"
-        android:textSize="@dimen/_20ssp"
-        android:textStyle="bold"
         android:layout_below="@id/toolbarHolder"
-        android:layout_marginTop="@dimen/_30sdp"/>
+        android:layout_marginTop="@dimen/_30sdp"
+        android:text="All Shows"
+        android:textColor="?attr/textBlack700"
+        android:textSize="@dimen/_20ssp"
+        android:textStyle="bold" />
 
     <FrameLayout
         android:layout_width="match_parent"

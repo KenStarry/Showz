@@ -58,6 +58,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/showRating"
                     android:text="3.6"
+                    android:textColor="?attr/textBlack300"
                     android:textStyle="bold"
                     android:textSize="@dimen/_12ssp"
                     android:includeFontPadding="false"/>
@@ -73,6 +74,7 @@
             android:layout_weight="1"
             android:id="@+id/showTitle"
             android:text="Black Panther"
+            android:textColor="?attr/textBlack700"
             android:textStyle="bold"
             android:textSize="@dimen/_12ssp"
             android:layout_gravity="center_horizontal"
