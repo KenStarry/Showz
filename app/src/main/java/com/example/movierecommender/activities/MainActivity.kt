@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.Fade
 import androidx.transition.Transition
+import androidx.viewpager2.widget.ViewPager2
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -18,7 +19,9 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.example.movierecommender.R
 import com.example.movierecommender.adapters.AllShowsRecyclerAdapter
+import com.example.movierecommender.adapters.TopRatedViewPagerAdapter
 import com.example.movierecommender.models.ShowDataModel
+import me.relex.circleindicator.CircleIndicator3
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.ArrayList
@@ -27,10 +30,16 @@ class MainActivity : AppCompatActivity() {
 
     //  url for querying our data
     private val url = "https://api.tvmaze.com/shows"
+    private var viewPagerAdapter: TopRatedViewPagerAdapter? = null
 
     private var showsModelArrayList: ArrayList<ShowDataModel>? = null
+    private var topRatedArrayList: ArrayList<ShowDataModel>? = null
+
     private var recyclerView: RecyclerView? = null
     private var progressBar: ProgressBar? = null
+    private var topRatedProgressBar: ProgressBar? = null
+    private var viewPager2: ViewPager2? = null
+    private var indicators: CircleIndicator3? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -38,8 +47,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         showsModelArrayList = ArrayList()
+        topRatedArrayList = ArrayList()
         recyclerView = findViewById(R.id.allShowsRecyclerView)
         progressBar = findViewById(R.id.progressBar)
+        topRatedProgressBar = findViewById(R.id.topRatedProgressBar)
+        viewPager2 = findViewById(R.id.topRatedViewPager)
+        indicators = findViewById(R.id.circleIndicator)
 
         queryData()
     }
@@ -78,10 +91,25 @@ class MainActivity : AppCompatActivity() {
                             genresArrayList
                         )
                     )
+
+                    //  Add to the top rated arraylist
+                    if (showRating != "null") {
+
+                        if (showRating.toDouble() > 8.8) {
+                            topRatedArrayList!!.add(
+                                ShowDataModel(
+                                    showImage = showImage,
+                                    showTitle = showName,
+                                    showRating = showRating,
+                                    showId = showId,
+                                    genresArrayList
+                                )
+                            )
+                        }
+                    }
                 }
 
-                progressBar?.visibility = View.GONE
-                recyclerView?.visibility = View.VISIBLE
+                buildViewPager2()
                 buildRecyclerView()
 
             },
@@ -95,11 +123,24 @@ class MainActivity : AppCompatActivity() {
 
     private fun buildRecyclerView() {
 
+        progressBar?.visibility = View.GONE
+        recyclerView?.visibility = View.VISIBLE
+
         val allShowsRecyclerAdapter = AllShowsRecyclerAdapter(showsModelArrayList, this)
         val gridLayoutManager = GridLayoutManager(this, 2)
 
         recyclerView!!.layoutManager = gridLayoutManager
         recyclerView!!.adapter = allShowsRecyclerAdapter
 
+    }
+
+    private fun buildViewPager2() {
+
+        topRatedProgressBar?.visibility = View.GONE
+        viewPager2?.visibility = View.VISIBLE
+        viewPagerAdapter = TopRatedViewPagerAdapter(this, topRatedArrayList!!)
+        viewPager2?.adapter = viewPagerAdapter
+
+        indicators?.setViewPager(viewPager2)
     }
 }

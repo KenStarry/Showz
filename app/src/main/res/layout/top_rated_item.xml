@@ -8,8 +8,8 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="@dimen/_200sdp"
+        android:layout_width="@dimen/_180sdp"
+        android:layout_height="@dimen/_180sdp"
         android:id="@+id/imageHolder"
         app:cardElevation="0dp"
         app:cardCornerRadius="@dimen/_10sdp">

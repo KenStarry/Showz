@@ -8,7 +8,6 @@
     android:padding="@dimen/_10sdp"
     tools:context=".activities.MainActivity">
 
-
     <LinearLayout
         android:id="@+id/toolbarHolder"
         android:layout_width="match_parent"
@@ -80,64 +79,99 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/viewPagerHolder"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:layout_below="@id/toolbarHolder"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/topRatedTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Top Rated"
-            android:textColor="?attr/textBlack700"
-            android:textSize="@dimen/_16ssp"
-            android:textStyle="bold" />
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/topRatedViewPager"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_200sdp"
-            android:layout_marginTop="@dimen/_10sdp" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/allShowsTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/viewPagerHolder"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:text="All Shows"
-        android:textColor="?attr/textBlack700"
-        android:textSize="@dimen/_16ssp"
-        android:textStyle="bold" />
-
-    <FrameLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/bottomNav"
-        android:layout_below="@id/allShowsTitle"
-        android:layout_marginTop="@dimen/_20sdp">
+        android:layout_below="@id/toolbarHolder">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/allShowsRecyclerView"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
+            android:layout_height="wrap_content">
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:progressTint="?attr/colorPrimary"
-            android:layout_gravity="center" />
+            <LinearLayout
+                android:id="@+id/viewPagerHolder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-    </FrameLayout>
+                <TextView
+                    android:id="@+id/topRatedTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Top Rated"
+                    android:textColor="?attr/textBlack700"
+                    android:textSize="@dimen/_16ssp"
+                    android:textStyle="bold" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_20sdp">
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/topRatedViewPager"
+                        android:layout_width="@dimen/_250sdp"
+                        android:layout_height="@dimen/_220sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:visibility="invisible"/>
+
+                    <ProgressBar
+                        android:id="@+id/topRatedProgressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:progressTint="?attr/colorPrimary" />
+
+                </FrameLayout>
+
+                <me.relex.circleindicator.CircleIndicator3
+                    android:id="@+id/circleIndicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/allShowsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/viewPagerHolder"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:text="All Shows"
+                android:textColor="?attr/textBlack700"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/allShowsTitle"
+                android:layout_marginTop="@dimen/_20sdp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/allShowsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:fastScrollEnabled="false"
+                    android:visibility="invisible" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:progressTint="?attr/colorPrimary" />
+
+            </FrameLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
@@ -149,5 +183,6 @@
         app:itemRippleColor="?attr/colorOnPrimary"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/bottom_nav_menu" />
+
 
 </RelativeLayout>
