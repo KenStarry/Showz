@@ -51,7 +51,10 @@ class AllShowsRecyclerAdapter(arrayList: ArrayList<ShowDataModel>?, private val 
             val intent = Intent(context as Activity, ViewShowActivity::class.java).apply {
                 putExtra("showImageExtra", showDataModel.showImage)
                 putExtra("showTitleExtra", showDataModel.showTitle)
+                putExtra("genresArrayList", showDataModel.showGenres)
             }
+
+            Toast.makeText(context, showDataModel.showGenres.toString(), Toast.LENGTH_SHORT).show()
 
             context.startActivity(intent, options.toBundle())
         }

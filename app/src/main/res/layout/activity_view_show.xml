@@ -15,9 +15,10 @@
         android:scaleType="centerCrop"
         android:transitionName="showImageTransition"/>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:layout_marginTop="@dimen/_220sdp">
 
         <LinearLayout
@@ -46,6 +47,20 @@
 
         </LinearLayout>
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_50sdp"
+                android:id="@+id/genresRecyclerView"
+                android:layout_gravity="center_horizontal"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
 
 </FrameLayout>

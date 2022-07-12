@@ -37,15 +37,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        var fadeAnimation = Fade()
-//        var decor: View = window.decorView
-//
-//        fadeAnimation.excludeTarget(android.R.id.statusBarBackground, true)
-//        fadeAnimation.excludeTarget(android.R.id.navigationBarBackground, true)
-//
-//        window.enterTransition = fadeAnimation
-//        window.exitTransition = fadeAnimation
-
         showsModelArrayList = ArrayList()
         recyclerView = findViewById(R.id.allShowsRecyclerView)
         progressBar = findViewById(R.id.progressBar)
@@ -71,13 +62,20 @@ class MainActivity : AppCompatActivity() {
                         responseJSONObject.getJSONObject("image").getString("original")
 
                     val showId: String = responseJSONObject.getString("id")
+                    val showGenresArray = responseJSONObject.getJSONArray("genres")
+                    val genresArrayList = ArrayList<String>()
+
+                    for (j in 0 until showGenresArray.length()) {
+                        genresArrayList.add(showGenresArray[j] as String)
+                    }
 
                     showsModelArrayList!!.add(
                         ShowDataModel(
                             showImage = showImage,
                             showTitle = showName,
                             showRating = showRating,
-                            showId = showId
+                            showId = showId,
+                            genresArrayList
                         )
                     )
                 }
