@@ -21,6 +21,7 @@ import com.example.movierecommender.R
 import com.example.movierecommender.adapters.AllShowsRecyclerAdapter
 import com.example.movierecommender.adapters.TopRatedViewPagerAdapter
 import com.example.movierecommender.models.ShowDataModel
+import com.example.movierecommender.network.RequestSingleton
 import me.relex.circleindicator.CircleIndicator3
 import org.json.JSONArray
 import org.json.JSONObject
@@ -59,12 +60,46 @@ class MainActivity : AppCompatActivity() {
 
     fun queryData() {
 
-        val requestQueue: RequestQueue = Volley.newRequestQueue(this)
+//        val requestQueue: RequestQueue = Volley.newRequestQueue(this)
+        val requestQueue = RequestSingleton.getInstance(this.applicationContext).requestQueue
 
         val jsonArrayRequest = JsonArrayRequest(Request.Method.GET, url, null,
             { response ->
 
                 for (i in 0 until response.length()) {
+                    val responseJSONObject: JSONObject = response.getJSONObject(i)
+                    val showName: String = responseJSONObject.getString("name")
+                    val showRating: String =
+                        responseJSONObject.getJSONObject("rating").getString("average")
+
+                    val showImage: String =
+                        responseJSONObject.getJSONObject("image").getString("original")
+
+                    val showId: String = responseJSONObject.getString("id")
+                    val showGenresArray = responseJSONObject.getJSONArray("genres")
+                    val genresArrayList = ArrayList<String>()
+
+                    for (j in 0 until showGenresArray.length()) {
+                        genresArrayList.add(showGenresArray[j] as String)
+                    }
+                    //  Add to the top rated arraylist
+                    if (showRating != "null") {
+
+                        if (showRating.toDouble() > 8.8) {
+                            topRatedArrayList!!.add(
+                                ShowDataModel(
+                                    showImage = showImage,
+                                    showTitle = showName,
+                                    showRating = showRating,
+                                    showId = showId,
+                                    genresArrayList
+                                )
+                            )
+                        }
+                    }
+                }
+
+                for (i in 0 until 50) {
 
                     val responseJSONObject: JSONObject = response.getJSONObject(i)
                     val showName: String = responseJSONObject.getString("name")
@@ -92,21 +127,6 @@ class MainActivity : AppCompatActivity() {
                         )
                     )
 
-                    //  Add to the top rated arraylist
-                    if (showRating != "null") {
-
-                        if (showRating.toDouble() > 8.8) {
-                            topRatedArrayList!!.add(
-                                ShowDataModel(
-                                    showImage = showImage,
-                                    showTitle = showName,
-                                    showRating = showRating,
-                                    showId = showId,
-                                    genresArrayList
-                                )
-                            )
-                        }
-                    }
                 }
 
                 buildViewPager2()
@@ -118,7 +138,8 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "$error occured", Toast.LENGTH_LONG).show()
             })
 
-        requestQueue.add(jsonArrayRequest)
+        RequestSingleton.getInstance(this).addToRequestQueue(jsonArrayRequest)
+//        requestQueue.add(jsonArrayRequest)
     }
 
     private fun buildRecyclerView() {

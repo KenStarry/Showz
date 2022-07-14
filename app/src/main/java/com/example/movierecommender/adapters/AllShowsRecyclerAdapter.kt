@@ -54,8 +54,6 @@ class AllShowsRecyclerAdapter(arrayList: ArrayList<ShowDataModel>?, private val 
                 putExtra("genresArrayList", showDataModel.showGenres)
             }
 
-            Toast.makeText(context, showDataModel.showGenres.toString(), Toast.LENGTH_SHORT).show()
-
             context.startActivity(intent, options.toBundle())
         }
     }
