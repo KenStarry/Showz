@@ -114,7 +114,7 @@
                     <androidx.viewpager2.widget.ViewPager2
                         android:id="@+id/topRatedViewPager"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_220sdp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_gravity="center_horizontal"
                         android:visibility="invisible"/>

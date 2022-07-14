@@ -33,4 +33,34 @@
         android:textStyle="bold"
         android:layout_marginTop="@dimen/_10sdp"/>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_rating"
+        android:gravity="center_vertical"
+        android:padding="@dimen/_3sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rating"
+            android:src="@drawable/ic_star_half"
+            app:tint="?attr/colorPrimary"
+            android:layout_marginEnd="@dimen/_3sdp"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/topRatedShowRating"
+            android:text="3.6"
+            android:textColor="?attr/textBlack300"
+            android:textStyle="bold"
+            android:textSize="@dimen/_12ssp"
+            android:includeFontPadding="false"/>
+
+    </LinearLayout>
+
 </LinearLayout>

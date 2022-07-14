@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_rating"
                 android:gravity="center_vertical"
-                android:padding="@dimen/_5sdp"
+                android:padding="@dimen/_3sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:orientation="horizontal">

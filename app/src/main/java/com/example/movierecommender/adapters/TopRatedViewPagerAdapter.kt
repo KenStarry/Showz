@@ -21,6 +21,7 @@ class TopRatedViewPagerAdapter(
 
         var topRatedShowImage: ImageView = itemView.findViewById(R.id.topRatedShowImage)
         var topRatedShowName: TextView = itemView.findViewById(R.id.topRatedShowName)
+        var topratedShowRating: TextView = itemView.findViewById(R.id.topRatedShowRating)
 
     }
 
@@ -41,6 +42,7 @@ class TopRatedViewPagerAdapter(
         val model: ShowDataModel = topRatedShowsArrayList[position]
 
         holder.topRatedShowName.text = model.showTitle
+        holder.topratedShowRating.text = model.showRating
         Picasso.get().load(model.showImage).into(holder.topRatedShowImage)
     }
 
