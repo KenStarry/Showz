@@ -15,8 +15,10 @@
         <entry key="..\:/programyzilla/Kotlin/Android/MovieRecommender/app/src/main/res/layout/genre_item.xml" value="0.33" />
         <entry key="..\:/programyzilla/Kotlin/Android/MovieRecommender/app/src/main/res/layout/movie_card.xml" value="0.22447916666666667" />
         <entry key="..\:/programyzilla/Kotlin/Android/MovieRecommender/app/src/main/res/layout/show_card.xml" value="0.33" />
+        <entry key="..\:/programyzilla/Kotlin/Android/MovieRecommender/app/src/main/res/layout/toolbar.xml" value="0.22447916666666667" />
         <entry key="..\:/programyzilla/Kotlin/Android/MovieRecommender/app/src/main/res/layout/top_rated_item.xml" value="0.22447916666666667" />
         <entry key="..\:/programyzilla/Kotlin/Android/MovieRecommender/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22447916666666667" />
+        <entry key="..\:/programyzilla/Kotlin/Android/MovieRecommender/app/src/main/res/menu/toolbar_menu.xml" value="0.22447916666666667" />
       </map>
     </option>
   </component>

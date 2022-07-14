@@ -17,8 +17,8 @@
             android:layout_weight="1">
 
             <com.makeramen.roundedimageview.RoundedImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/colorofmusic_x"
                 app:riv_corner_radius="@dimen/corner_radius"
@@ -30,6 +30,8 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:layout_weight="5"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_5sdp"
             android:orientation="vertical">
 
             <TextView

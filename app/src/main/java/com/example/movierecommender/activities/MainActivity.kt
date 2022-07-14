@@ -4,9 +4,13 @@ import android.app.ActivityOptions
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,11 +46,15 @@ class MainActivity : AppCompatActivity() {
     private var topRatedProgressBar: ProgressBar? = null
     private var viewPager2: ViewPager2? = null
     private var indicators: CircleIndicator3? = null
+    private var toolbar: Toolbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
         showsModelArrayList = ArrayList()
         topRatedArrayList = ArrayList()
@@ -59,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         queryData()
     }
 
-    fun queryData() {
+    private fun queryData() {
 
 //        val requestQueue: RequestQueue = Volley.newRequestQueue(this)
         val requestQueue = RequestSingleton.getInstance(this.applicationContext).requestQueue
@@ -153,5 +161,26 @@ class MainActivity : AppCompatActivity() {
         viewPager2?.adapter = viewPagerAdapter
 
         indicators?.setViewPager(viewPager2)
+    }
+
+    //  On Creating the menu items
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        val menuInflater: MenuInflater = menuInflater
+
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+
+            R.id.darkModeMenu -> {
+
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }

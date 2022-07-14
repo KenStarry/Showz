@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/darkModeMenu"
+        android:title="Dark Mode"
+        android:icon="@drawable/ic_dark_mode"
+        app:showAsAction="ifRoom"/>
+
+    <group
+        android:menuCategory="container">
+
+        <item
+            android:id="@+id/ratingsMenu"
+            android:title="Ratings">
+
+            <menu>
+
+                <item
+                    android:id="@+id/rate1"
+                    android:title="8.0 - 10.0"/>
+
+                <item
+                    android:id="@+id/rate2"
+                    android:title="7.0 - 8.0"/>
+
+                <item
+                    android:id="@+id/rate3"
+                    android:title="6.0 - 7.0"/>
+
+                <item
+                    android:id="@+id/rate4"
+                    android:title="5.0 - 6.0"/>
+
+                <item
+                    android:id="@+id/rate5"
+                    android:title="Below 5.0"/>
+            </menu>
+        </item>
+
+    </group>
+
+</menu>
