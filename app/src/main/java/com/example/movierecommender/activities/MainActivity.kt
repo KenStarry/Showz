@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.Fade
 import androidx.transition.Transition
@@ -67,39 +68,6 @@ class MainActivity : AppCompatActivity() {
             { response ->
 
                 for (i in 0 until response.length()) {
-                    val responseJSONObject: JSONObject = response.getJSONObject(i)
-                    val showName: String = responseJSONObject.getString("name")
-                    val showRating: String =
-                        responseJSONObject.getJSONObject("rating").getString("average")
-
-                    val showImage: String =
-                        responseJSONObject.getJSONObject("image").getString("original")
-
-                    val showId: String = responseJSONObject.getString("id")
-                    val showGenresArray = responseJSONObject.getJSONArray("genres")
-                    val genresArrayList = ArrayList<String>()
-
-                    for (j in 0 until showGenresArray.length()) {
-                        genresArrayList.add(showGenresArray[j] as String)
-                    }
-                    //  Add to the top rated arraylist
-                    if (showRating != "null") {
-
-                        if (showRating.toDouble() > 8.8) {
-                            topRatedArrayList!!.add(
-                                ShowDataModel(
-                                    showImage = showImage,
-                                    showTitle = showName,
-                                    showRating = showRating,
-                                    showId = showId,
-                                    genresArrayList
-                                )
-                            )
-                        }
-                    }
-                }
-
-                for (i in 0 until 50) {
 
                     val responseJSONObject: JSONObject = response.getJSONObject(i)
                     val showName: String = responseJSONObject.getString("name")
@@ -129,8 +97,8 @@ class MainActivity : AppCompatActivity() {
 
                 }
 
-                buildViewPager2()
-                buildRecyclerView()
+                buildViewPager2(showsModelArrayList!!)
+                buildRecyclerView(showsModelArrayList!!)
 
             },
             { error ->
@@ -139,27 +107,49 @@ class MainActivity : AppCompatActivity() {
             })
 
         RequestSingleton.getInstance(this).addToRequestQueue(jsonArrayRequest)
-//        requestQueue.add(jsonArrayRequest)
     }
 
-    private fun buildRecyclerView() {
+    private fun buildRecyclerView(showsArrayList: ArrayList<ShowDataModel>) {
+
+        val allShowsRecyclerArrayList = ArrayList<ShowDataModel>()
+
+        for (i in 0 until showsArrayList.size) {
+            allShowsRecyclerArrayList.add(showsArrayList[i])
+        }
 
         progressBar?.visibility = View.GONE
         recyclerView?.visibility = View.VISIBLE
 
-        val allShowsRecyclerAdapter = AllShowsRecyclerAdapter(showsModelArrayList, this)
-        val gridLayoutManager = GridLayoutManager(this, 2)
+        val allShowsRecyclerAdapter = AllShowsRecyclerAdapter(allShowsRecyclerArrayList, this)
+        val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        recyclerView!!.layoutManager = gridLayoutManager
+        recyclerView!!.layoutManager = linearLayoutManager
         recyclerView!!.adapter = allShowsRecyclerAdapter
 
     }
 
-    private fun buildViewPager2() {
+    private fun buildViewPager2(showsArrayList: ArrayList<ShowDataModel>) {
+
+        val topArrayList = ArrayList<ShowDataModel>()
+
+        for (i in  0 until showsArrayList.size) {
+
+            if (showsArrayList[i].showRating != "null") {
+
+                if (showsArrayList[i].showRating.toDouble() > 8.8) {
+
+                    showsArrayList[i].let { topArrayList.add(it) }
+                }
+            }
+
+        }
+
+        Toast.makeText(applicationContext, showsArrayList.size.toString(), Toast.LENGTH_SHORT).show()
+
 
         topRatedProgressBar?.visibility = View.GONE
         viewPager2?.visibility = View.VISIBLE
-        viewPagerAdapter = TopRatedViewPagerAdapter(this, topRatedArrayList!!)
+        viewPagerAdapter = TopRatedViewPagerAdapter(this, topArrayList)
         viewPager2?.adapter = viewPagerAdapter
 
         indicators?.setViewPager(viewPager2)

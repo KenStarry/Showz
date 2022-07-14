@@ -113,7 +113,7 @@
 
                     <androidx.viewpager2.widget.ViewPager2
                         android:id="@+id/topRatedViewPager"
-                        android:layout_width="@dimen/_250sdp"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/_220sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_gravity="center_horizontal"
@@ -130,22 +130,57 @@
 
                 <me.relex.circleindicator.CircleIndicator3
                     android:id="@+id/circleIndicator"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:backgroundTintMode="multiply"
+                    android:backgroundTint="@color/text_white_900"
                     android:layout_height="wrap_content"
+                    android:tint="?attr/textBlack900"
                     android:layout_marginTop="@dimen/_10sdp"/>
 
             </LinearLayout>
 
-            <TextView
+            <LinearLayout
                 android:id="@+id/allShowsTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/viewPagerHolder"
                 android:layout_marginTop="@dimen/_30sdp"
-                android:text="All Shows"
-                android:textColor="?attr/textBlack700"
-                android:textSize="@dimen/_16ssp"
-                android:textStyle="bold" />
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="All Shows"
+                    android:textColor="?attr/textBlack700"
+                    android:textSize="@dimen/_16ssp"
+                    android:textStyle="bold"
+                    android:layout_weight="4"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="See All"
+                        android:textColor="?attr/textBlack300"
+                        android:textSize="@dimen/_11ssp"
+                        android:textStyle="bold"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_right_24"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"
