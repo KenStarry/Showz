@@ -187,6 +187,7 @@ class MainActivity : AppCompatActivity() {
                             },
                             { castError ->
 
+                                Toast.makeText(this, "$castError occured", Toast.LENGTH_LONG).show()
                             })
 
                     RequestSingleton.getInstance(this).addToRequestQueue(castJsonArrayRequest)

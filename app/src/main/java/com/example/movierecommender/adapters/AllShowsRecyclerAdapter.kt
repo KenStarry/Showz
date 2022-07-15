@@ -64,58 +64,8 @@ class AllShowsRecyclerAdapter(
                 putExtra("genresArrayList", showDataModel.showGenres)
             }
 
-            queryCast()
-
             context.startActivity(intent, options.toBundle())
         }
-    }
-
-    private fun queryCast() {
-        //  url for the cast
-        val castUrl = "https://api.tvmaze.com/shows/5/cast"
-
-        val castJsonArrayRequest =
-            JsonArrayRequest(
-                Request.Method.GET, castUrl, null,
-                { castResponse ->
-
-                    for (j in 0 until castResponse.length()) {
-
-                        val castObject: JSONObject = castResponse.getJSONObject(j)
-
-                        val pName =
-                            castObject.getJSONObject("person").getString("name")
-                        val pCountry =
-                            castObject.getJSONObject("person").getJSONObject("country")
-                                .getString("name")
-                        val pBirthday =
-                            castObject.getJSONObject("person").getString("birthday")
-                        val pGender =
-                            castObject.getJSONObject("person").getString("gender")
-                        val pImage =
-                            castObject.getJSONObject("person").getJSONObject("image")
-                                .getString("original")
-                        val characterName =
-                            castObject.getJSONObject("character").getString("name")
-
-//                        castsArrayList!!.add(
-//                            CastModel(
-//                                personName = pName,
-//                                personBirthday = pBirthday,
-//                                personCountry = pCountry,
-//                                personGender = pGender,
-//                                personImage = pImage,
-//                                characterName = characterName
-//                            )
-//                        )
-                    }
-
-                },
-                { castError ->
-
-                })
-
-        RequestSingleton.getInstance(context).addToRequestQueue(castJsonArrayRequest)
     }
 
     override fun getItemCount(): Int {
