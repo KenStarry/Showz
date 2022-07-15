@@ -106,10 +106,6 @@ class MainActivity : AppCompatActivity() {
         queryData()
     }
 
-    private fun queryCast() {
-
-    }
-
     private fun queryData() {
 
 //        val requestQueue: RequestQueue = Volley.newRequestQueue(this)
