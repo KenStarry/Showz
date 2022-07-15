@@ -12,13 +12,23 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonArrayRequest
+import com.bumptech.glide.Glide
 import com.example.movierecommender.R
 import com.example.movierecommender.activities.ViewShowActivity
+import com.example.movierecommender.models.CastModel
 import com.example.movierecommender.models.ShowDataModel
+import com.example.movierecommender.network.RequestSingleton
 import com.squareup.picasso.Picasso
+import org.json.JSONObject
 import java.util.ArrayList
 
-class AllShowsRecyclerAdapter(arrayList: ArrayList<ShowDataModel>?, private val context: Context) :
+class AllShowsRecyclerAdapter(
+    arrayList: ArrayList<ShowDataModel>?,
+    private val context: Context
+
+) :
     RecyclerView.Adapter<AllShowsRecyclerAdapter.ViewHolder>() {
 
     private val showsArrayList: ArrayList<ShowDataModel>? = arrayList
@@ -54,8 +64,58 @@ class AllShowsRecyclerAdapter(arrayList: ArrayList<ShowDataModel>?, private val 
                 putExtra("genresArrayList", showDataModel.showGenres)
             }
 
+            queryCast()
+
             context.startActivity(intent, options.toBundle())
         }
+    }
+
+    private fun queryCast() {
+        //  url for the cast
+        val castUrl = "https://api.tvmaze.com/shows/5/cast"
+
+        val castJsonArrayRequest =
+            JsonArrayRequest(
+                Request.Method.GET, castUrl, null,
+                { castResponse ->
+
+                    for (j in 0 until castResponse.length()) {
+
+                        val castObject: JSONObject = castResponse.getJSONObject(j)
+
+                        val pName =
+                            castObject.getJSONObject("person").getString("name")
+                        val pCountry =
+                            castObject.getJSONObject("person").getJSONObject("country")
+                                .getString("name")
+                        val pBirthday =
+                            castObject.getJSONObject("person").getString("birthday")
+                        val pGender =
+                            castObject.getJSONObject("person").getString("gender")
+                        val pImage =
+                            castObject.getJSONObject("person").getJSONObject("image")
+                                .getString("original")
+                        val characterName =
+                            castObject.getJSONObject("character").getString("name")
+
+//                        castsArrayList!!.add(
+//                            CastModel(
+//                                personName = pName,
+//                                personBirthday = pBirthday,
+//                                personCountry = pCountry,
+//                                personGender = pGender,
+//                                personImage = pImage,
+//                                characterName = characterName
+//                            )
+//                        )
+                    }
+
+                },
+                { castError ->
+
+                })
+
+        RequestSingleton.getInstance(context).addToRequestQueue(castJsonArrayRequest)
     }
 
     override fun getItemCount(): Int {

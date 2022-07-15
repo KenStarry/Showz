@@ -7,13 +7,25 @@
     android:background="?attr/colorOnPrimary"
     tools:context=".activities.ViewShowActivity">
 
-    <ImageView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_300sdp"
-        android:id="@+id/viewShowImage"
-        android:src="@drawable/colorofmusic_x"
-        android:scaleType="centerCrop"
-        android:transitionName="showImageTransition"/>
+        android:layout_height="@dimen/_300sdp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/viewShowImage"
+            android:src="@drawable/colorofmusic_x"
+            android:scaleType="centerCrop"
+            android:transitionName="showImageTransition"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black_trans"/>
+
+    </FrameLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"

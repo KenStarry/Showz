@@ -3,6 +3,7 @@ package com.example.movierecommender.network
 import android.content.Context
 import com.android.volley.Request
 import com.android.volley.RequestQueue
+import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 
 class RequestSingleton constructor(context: Context) {

@@ -1,6 +1,5 @@
 package com.example.movierecommender.activities
 
-import android.app.ActivityOptions
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -27,6 +26,7 @@ import com.android.volley.toolbox.Volley
 import com.example.movierecommender.R
 import com.example.movierecommender.adapters.AllShowsRecyclerAdapter
 import com.example.movierecommender.adapters.TopRatedViewPagerAdapter
+import com.example.movierecommender.models.CastModel
 import com.example.movierecommender.models.ShowDataModel
 import com.example.movierecommender.network.RequestSingleton
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     private var showsModelArrayList: ArrayList<ShowDataModel>? = null
     private var topRatedArrayList: ArrayList<ShowDataModel>? = null
+    private var castsArrayList: ArrayList<CastModel>? = null
 
     private var recyclerView: RecyclerView? = null
     private var progressBar: ProgressBar? = null
@@ -76,6 +77,14 @@ class MainActivity : AppCompatActivity() {
         bottomNav?.setOnItemSelectedListener {
             when (it.itemId) {
 
+                R.id.bottomHome -> {
+                    it.isChecked = true
+                }
+
+                R.id.bottomSearch -> {
+                    it.isChecked = true
+                }
+
                 R.id.bottomSettings -> {
                     val intent = Intent(this, SettingsActivity::class.java)
                     startActivity(intent)
@@ -95,6 +104,10 @@ class MainActivity : AppCompatActivity() {
 
 
         queryData()
+    }
+
+    private fun queryCast() {
+
     }
 
     private fun queryData() {
@@ -133,6 +146,51 @@ class MainActivity : AppCompatActivity() {
                         )
                     )
 
+                    //  url for the cast
+                    val castUrl = "https://api.tvmaze.com/shows/${i + 1}/cast"
+
+                    val castJsonArrayRequest =
+                        JsonArrayRequest(Request.Method.GET, castUrl, null,
+                            { castResponse ->
+
+                                for (j in 0 until castResponse.length()) {
+
+                                    val castObject: JSONObject = castResponse.getJSONObject(j)
+
+                                    val pName =
+                                        castObject.getJSONObject("person").getString("name")
+                                    val pCountry =
+                                        castObject.getJSONObject("person").getJSONObject("country")
+                                            .getString("name")
+                                    val pBirthday =
+                                        castObject.getJSONObject("person").getString("birthday")
+                                    val pGender =
+                                        castObject.getJSONObject("person").getString("gender")
+                                    val pImage =
+                                        castObject.getJSONObject("person").getJSONObject("image")
+                                            .getString("original")
+                                    val characterName =
+                                        castObject.getJSONObject("character").getString("name")
+
+                                    castsArrayList!!.add(
+                                        CastModel(
+                                            personName = pName,
+                                            personBirthday = pBirthday,
+                                            personCountry = pCountry,
+                                            personGender = pGender,
+                                            personImage = pImage,
+                                            characterName = characterName
+                                        )
+                                    )
+                                }
+
+                            },
+                            { castError ->
+
+                            })
+
+                    RequestSingleton.getInstance(this).addToRequestQueue(castJsonArrayRequest)
+
                 }
 
                 buildViewPager2(showsModelArrayList!!)
@@ -147,7 +205,9 @@ class MainActivity : AppCompatActivity() {
         RequestSingleton.getInstance(this).addToRequestQueue(jsonArrayRequest)
     }
 
-    private fun buildRecyclerView(showsArrayList: ArrayList<ShowDataModel>) {
+    private fun buildRecyclerView(
+        showsArrayList: ArrayList<ShowDataModel>
+    ) {
 
         val allShowsRecyclerArrayList = ArrayList<ShowDataModel>()
 
@@ -170,7 +230,7 @@ class MainActivity : AppCompatActivity() {
 
         val topArrayList = ArrayList<ShowDataModel>()
 
-        for (i in  0 until showsArrayList.size) {
+        for (i in 0 until showsArrayList.size) {
 
             if (showsArrayList[i].showRating != "null") {
 
@@ -182,7 +242,8 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        Toast.makeText(applicationContext, showsArrayList.size.toString(), Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, showsArrayList.size.toString(), Toast.LENGTH_SHORT)
+            .show()
 
 
         topRatedProgressBar?.visibility = View.GONE

@@ -19,6 +19,7 @@
     <color name="text_black_700">#171717</color>
     <color name="text_black_500">#2B2B2B</color>
     <color name="text_black_300">#333333</color>
+    <color name="black_trans">#80000000</color>
 
 
     <!--Dark mode-->

@@ -12,6 +12,7 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
+import com.bumptech.glide.Glide
 import com.example.movierecommender.R
 import com.example.movierecommender.adapters.GenresRecyclerAdapter
 import com.squareup.picasso.Picasso
@@ -77,6 +78,10 @@ class ViewShowActivity : AppCompatActivity() {
         genresRecyclerView = findViewById(R.id.genresRecyclerView)
         genresRecyclerAdapter = GenresRecyclerAdapter(this, genresArrayList!!)
         genresLinearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+//        Glide.with(this)
+//            .load(showImageExtra)
+//            .into(viewShowImage!!)
 
         Picasso.get().load(showImageExtra).into(viewShowImage)
         viewShowTitle?.text = showTitleExtra
