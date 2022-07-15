@@ -17,7 +17,7 @@
         android:icon="@drawable/ic_favorite"/>
 
     <item
-        android:id="@+id/bottomProfile"
+        android:id="@+id/bottomSettings"
         android:title="Profile"
-        android:icon="@drawable/ic_person"/>
+        android:icon="@drawable/ic_settings"/>
 </menu>

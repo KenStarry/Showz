@@ -1,6 +1,7 @@
 package com.example.movierecommender.activities
 
 import android.app.ActivityOptions
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +29,9 @@ import com.example.movierecommender.adapters.AllShowsRecyclerAdapter
 import com.example.movierecommender.adapters.TopRatedViewPagerAdapter
 import com.example.movierecommender.models.ShowDataModel
 import com.example.movierecommender.network.RequestSingleton
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
+import com.google.android.material.navigation.NavigationView
 import me.relex.circleindicator.CircleIndicator3
 import org.json.JSONArray
 import org.json.JSONObject
@@ -47,6 +52,7 @@ class MainActivity : AppCompatActivity() {
     private var viewPager2: ViewPager2? = null
     private var indicators: CircleIndicator3? = null
     private var toolbar: Toolbar? = null
+    private var bottomNav: BottomNavigationView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -63,6 +69,30 @@ class MainActivity : AppCompatActivity() {
         topRatedProgressBar = findViewById(R.id.topRatedProgressBar)
         viewPager2 = findViewById(R.id.topRatedViewPager)
         indicators = findViewById(R.id.circleIndicator)
+        bottomNav = findViewById(R.id.bottomNav)
+
+        //  Set default selected bottom nav item
+        bottomNav?.menu?.findItem(R.id.bottomHome)?.isChecked = true
+        bottomNav?.setOnItemSelectedListener {
+            when (it.itemId) {
+
+                R.id.bottomSettings -> {
+                    val intent = Intent(this, SettingsActivity::class.java)
+                    startActivity(intent)
+
+                    it.isChecked = true
+                }
+
+                R.id.bottomFavourites -> {
+                    Toast.makeText(this, "Favourites", Toast.LENGTH_SHORT).show()
+
+                    it.isChecked = true
+                }
+            }
+
+            return@setOnItemSelectedListener false
+        }
+
 
         queryData()
     }
@@ -177,10 +207,12 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
 
             R.id.darkModeMenu -> {
-
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
         }
 
         return super.onOptionsItemSelected(item)
     }
+
+
 }
