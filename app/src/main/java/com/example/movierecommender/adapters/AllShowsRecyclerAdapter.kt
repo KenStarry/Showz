@@ -66,6 +66,7 @@ class AllShowsRecyclerAdapter(
                 putExtra("showImageExtra", showDataModel.showImage)
                 putExtra("showTitleExtra", showDataModel.showTitle)
                 putExtra("genresArrayList", showDataModel.showGenres)
+                putExtra("CAST_ARRAYLIST", castArrayList)
             }
 
 
