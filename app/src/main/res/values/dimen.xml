@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="bg_padding">10dp</dimen>
+    
+    <dimen name="pageMargin">20dp</dimen>
+    <dimen name="pagerOffset">30dp</dimen>
+    <dimen name="pageMarginAndOffset">50dp</dimen>
 
     <dimen name="toolbar_height">50dp</dimen>
     <dimen name="corner_radius">100dp</dimen>

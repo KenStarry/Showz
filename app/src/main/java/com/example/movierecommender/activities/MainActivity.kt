@@ -12,12 +12,16 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.Fade
 import androidx.transition.Transition
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager2.widget.ViewPager2.ORIENTATION_HORIZONTAL
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -36,6 +40,7 @@ import me.relex.circleindicator.CircleIndicator3
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.ArrayList
+import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
 
@@ -199,8 +204,48 @@ class MainActivity : AppCompatActivity() {
 
         topRatedProgressBar?.visibility = View.GONE
         viewPager2?.visibility = View.VISIBLE
+
         viewPagerAdapter = TopRatedViewPagerAdapter(this, topArrayList)
+        viewPager2?.clipToPadding = false
+        viewPager2?.clipChildren = false
+        viewPager2?.offscreenPageLimit = 1
+        viewPager2?.getChildAt(0)?.overScrollMode = View.OVER_SCROLL_IF_CONTENT_SCROLLS
         viewPager2?.adapter = viewPagerAdapter
+
+        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.pageMargin)
+        val offsetPx = resources.getDimensionPixelOffset(R.dimen.pagerOffset)
+
+        viewPager2?.setPageTransformer { page, position ->
+            val viewPager = page.parent.parent as ViewPager2
+            val offset = position * -(2 * offsetPx + pageMarginPx)
+
+            if (viewPager.orientation == ORIENTATION_HORIZONTAL) {
+
+                if (ViewCompat.getLayoutDirection(viewPager) == ViewCompat.LAYOUT_DIRECTION_RTL)
+                    page.translationX = -offset
+                else
+                    page.translationX = offset
+
+            } else
+                page.translationY = offset
+
+            //  For the animation of sliding in of viewpager
+            page.apply {
+                translationY = abs(position) * 100f
+                scaleX = 1f
+                scaleY = 1f
+            }
+        }
+
+//        val pageTransformer = CompositePageTransformer()
+//        pageTransformer.addTransformer(MarginPageTransformer(8))
+//        pageTransformer.addTransformer { page, position ->
+//
+//            val v = 1 - abs(position)
+//            page.scaleY = 0.8f + v * 0.2f
+//
+//        }
+//        viewPager2?.setPageTransformer(pageTransformer)
 
         indicators?.setViewPager(viewPager2)
     }
