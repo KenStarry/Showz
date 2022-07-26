@@ -237,16 +237,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-//        val pageTransformer = CompositePageTransformer()
-//        pageTransformer.addTransformer(MarginPageTransformer(8))
-//        pageTransformer.addTransformer { page, position ->
-//
-//            val v = 1 - abs(position)
-//            page.scaleY = 0.8f + v * 0.2f
-//
-//        }
-//        viewPager2?.setPageTransformer(pageTransformer)
-
         indicators?.setViewPager(viewPager2)
     }
 
