@@ -15,6 +15,7 @@ import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.example.movierecommender.R
 import com.example.movierecommender.adapters.GenresRecyclerAdapter
+import com.example.movierecommender.models.CastModel
 import com.squareup.picasso.Picasso
 import org.json.JSONObject
 import java.util.ArrayList
@@ -28,6 +29,7 @@ class ViewShowActivity : AppCompatActivity() {
     private var genresLinearLayoutManager: LinearLayoutManager? = null
 
     private val url = "https://api.tvmaze.com/shows"
+
     private var showImageExtra: String? = null
     private var showTitleExtra: String? = null
     private var genresArrayList: ArrayList<String>? = null
@@ -79,9 +81,6 @@ class ViewShowActivity : AppCompatActivity() {
         genresRecyclerAdapter = GenresRecyclerAdapter(this, genresArrayList!!)
         genresLinearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-//        Glide.with(this)
-//            .load(showImageExtra)
-//            .into(viewShowImage!!)
 
         Picasso.get().load(showImageExtra).into(viewShowImage)
         viewShowTitle?.text = showTitleExtra

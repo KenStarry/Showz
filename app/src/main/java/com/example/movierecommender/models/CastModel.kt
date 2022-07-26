@@ -5,7 +5,6 @@ class CastModel(
     var personCountry: String,
     var personBirthday: String,
     var personGender: String,
-    var personImage: String,
     var characterName: String
 
 ) {

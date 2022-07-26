@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.example.movierecommender.R
 import com.example.movierecommender.activities.ViewShowActivity
@@ -51,6 +52,9 @@ class AllShowsRecyclerAdapter(
         //  OnClick listeners
         holder.showImage.setOnClickListener {
 
+            val castArrayList: ArrayList<CastModel> = queryCast(position)
+            Toast.makeText(context, castArrayList.size.toString(), Toast.LENGTH_SHORT).show()
+
             //  Make an image transition
             val options = ActivityOptions.makeSceneTransitionAnimation(
                 context as Activity,
@@ -64,8 +68,64 @@ class AllShowsRecyclerAdapter(
                 putExtra("genresArrayList", showDataModel.showGenres)
             }
 
+
             context.startActivity(intent, options.toBundle())
         }
+    }
+
+    private fun queryCast(index: Int): ArrayList<CastModel> {
+
+        val castArrayList = ArrayList<CastModel>()
+
+        val requestQueue = Volley.newRequestQueue(context)
+        //  url for the cast
+        val castUrl = "https://api.tvmaze.com/shows/$index/cast"
+
+        val castJsonArrayRequest =
+            JsonArrayRequest(
+                Request.Method.GET, castUrl, null,
+                { castResponse ->
+
+                    for (j in 0 until castResponse.length()) {
+
+                        val castObject: JSONObject = castResponse.getJSONObject(j)
+
+                        val pName =
+                            castObject.getJSONObject("person").getString("name")
+                        val pCountry =
+                            castObject.getJSONObject("person").getJSONObject("country")
+                                .getString("name")
+                        val pBirthday =
+                            castObject.getJSONObject("person").getString("birthday")
+                        val pGender =
+                            castObject.getJSONObject("person").getString("gender")
+                        val pImage =
+                            castObject.getJSONObject("person").getJSONObject("image")
+                                .getString("original")
+                        val characterName =
+                            castObject.getJSONObject("character").getString("name")
+
+                        castArrayList.add(
+                            CastModel(
+                                personName = pName,
+                                personBirthday = pBirthday,
+                                personCountry = pCountry,
+                                personGender = pGender,
+                                characterName = characterName
+                            )
+                        )
+                    }
+
+                    Toast.makeText(context, castArrayList.size.toString(), Toast.LENGTH_SHORT).show()
+
+                },
+                { castError ->
+
+                })
+
+        requestQueue.add(castJsonArrayRequest)
+
+        return castArrayList
     }
 
     override fun getItemCount(): Int {
